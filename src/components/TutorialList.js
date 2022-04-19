@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TutorialDataService from "../services/TutorialService";
+import TutorialDataService from "../services/tutorial.service";
 import { Link } from "react-router-dom";
 const TutorialsList = () => {
     const [tutorials, setTutorials] = useState([]);
@@ -45,6 +45,7 @@ const TutorialsList = () => {
     const findByTitle = () => {
         TutorialDataService.findByTitle(searchTitle)
             .then(response => {
+                if (response?.data?.length === 1) response.data = [response.data]
                 setTutorials(response.data);
                 console.log(response.data);
             })
@@ -120,7 +121,7 @@ const TutorialsList = () => {
                             {currentTutorial.published ? "Published" : "Pending"}
                         </div>
                         <Link
-                            to={"/tutorials/" + currentTutorial.id}
+                            to={"/tutorials/" + currentTutorial._id}
                             className="badge badge-warning"
                         >
                             Edit

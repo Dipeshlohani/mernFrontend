@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import TutorialDataService from "../services/TutorialService";
+
+import TutorialDataService from "../services/tutorial.service";
+
 const AddTutorial = () => {
     const initialTutorialState = {
         id: null,
@@ -11,6 +13,7 @@ const AddTutorial = () => {
     const [submitted, setSubmitted] = useState(false);
     const handleInputChange = event => {
         const { name, value } = event.target;
+        console.log(name, value, "========================");
         setTutorial({ ...tutorial, [name]: value });
     };
     const saveTutorial = () => {
